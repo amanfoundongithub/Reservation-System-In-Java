@@ -27,7 +27,7 @@ public class RajdhaniFactory implements TrainFactoryInterface {
         trainBuilder.reset();
         trainBuilder.addTrainFeatures(15, 250);
         trainBuilder.addTrainDetails(27.5, "WXM-MWS", TrainType.RAJDHANI);
-        trainBuilder.addTrainIdentifiers(trainNumber, openingStation, closingStation);
+        trainBuilder.addTrainIdentifiers(trainNumber, openingStation, closingStation, 300);
 
         return trainBuilder.build();
     }

@@ -32,10 +32,11 @@ public class TrainBuilder {
         this.Train.setTrainType(trainType);
     }
 
-    public void addTrainIdentifiers(int trainNumber,StationName openingStation,StationName closingStation){
+    public void addTrainIdentifiers(int trainNumber,StationName openingStation,StationName closingStation, int ticketPrice){
         this.Train.setTrainNumber(trainNumber);
         this.Train.setOpeningStation(openingStation);
         this.Train.setClosingStation(closingStation);
+        this.Train.setTicketPrice(ticketPrice);
     }
 
     public Train build(){

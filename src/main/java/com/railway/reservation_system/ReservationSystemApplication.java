@@ -12,6 +12,10 @@ import com.railway.reservation_system.Models.Train.Train;
 import com.railway.reservation_system.Models.Train.Implementation.Factory.DurontoFactory;
 import com.railway.reservation_system.Models.Train.Implementation.Factory.RajdhaniFactory;
 import com.railway.reservation_system.Models.Train.Implementation.Factory.ShatabdiFactory;
+import com.railway.reservation_system.Models.payment.CreditCardPayment;
+import com.railway.reservation_system.Models.payment.DebitCardPayment;
+import com.railway.reservation_system.Models.payment.PaymentGateway;
+import com.railway.reservation_system.Models.payment.UpiPayment;
 import com.railway.reservation_system.repository.PassengerCRUDInterface;
 import com.railway.reservation_system.repository.TrainCRUDInterface;
 import com.railway.reservation_system.utils.date.DateAdapter;
@@ -44,6 +48,12 @@ public class ReservationSystemApplication implements CommandLineRunner {
 	private String emailID = "";
 	private String password = "";
 
+	private PaymentGateway paymentGateway = new PaymentGateway();
+
+	private CreditCardPayment creditCardPayment = new CreditCardPayment();
+	private DebitCardPayment debitCardPayment = new DebitCardPayment();
+	private UpiPayment upiPayment = new UpiPayment();
+
 	public static void main(String[] args) {
 		SpringApplication.run(ReservationSystemApplication.class, args);
 	}
@@ -55,13 +65,14 @@ public class ReservationSystemApplication implements CommandLineRunner {
 		System.out.println("Initializing Command Line Runner...");
 
 		/********************************************************
-		 * Populate with trains 
+		 * Populate with trains
 		 * 
 		 */
+		trainCRUDInterface.deleteAll();
 
 		RajdhaniFactory rajdhaniFactory = new RajdhaniFactory();
 
-		DurontoFactory durontoFactory   = new DurontoFactory();
+		DurontoFactory durontoFactory = new DurontoFactory();
 
 		ShatabdiFactory shatabdiFactory = new ShatabdiFactory();
 
@@ -71,8 +82,8 @@ public class ReservationSystemApplication implements CommandLineRunner {
 
 		int trainNum = 123450;
 		for (StationName openingStation : StationName.values()) {
-			for(StationName closingStation : StationName.values()){
-				if(openingStation != closingStation){
+			for (StationName closingStation : StationName.values()) {
+				if (openingStation != closingStation) {
 					Train rajdhaniTrain = rajdhaniFactory.createTrain(trainNum, openingStation, closingStation);
 
 					trainCRUDInterface.save(rajdhaniTrain);
@@ -80,13 +91,13 @@ public class ReservationSystemApplication implements CommandLineRunner {
 					trainNum += 1;
 				}
 			}
-			
+
 		}
 
 		trainNum = 121550;
 		for (StationName openingStation : StationName.values()) {
-			for(StationName closingStation : StationName.values()){
-				if(openingStation != closingStation){
+			for (StationName closingStation : StationName.values()) {
+				if (openingStation != closingStation) {
 					Train durontoTrain = durontoFactory.createTrain(trainNum, openingStation, closingStation);
 
 					trainCRUDInterface.save(durontoTrain);
@@ -94,13 +105,13 @@ public class ReservationSystemApplication implements CommandLineRunner {
 					trainNum += 1;
 				}
 			}
-			
+
 		}
 
 		trainNum = 108001;
 		for (StationName openingStation : StationName.values()) {
-			for(StationName closingStation : StationName.values()){
-				if(openingStation != closingStation){
+			for (StationName closingStation : StationName.values()) {
+				if (openingStation != closingStation) {
 					Train shatabdiTrain = shatabdiFactory.createTrain(trainNum, openingStation, closingStation);
 
 					trainCRUDInterface.save(shatabdiTrain);
@@ -108,7 +119,7 @@ public class ReservationSystemApplication implements CommandLineRunner {
 					trainNum += 1;
 				}
 			}
-			
+
 		}
 
 		/**
@@ -128,23 +139,19 @@ public class ReservationSystemApplication implements CommandLineRunner {
 				System.out.println("--------- LOGIN -------------------");
 				logIn();
 				System.out.println("-----------------------------------");
-			} 
-			else if (input == 2) {
+			} else if (input == 2) {
 				System.out.println("--------- SIGN UP -----------------");
 				signUp();
-				System.out.println("-----------------------------------");	
-			} 
-			else if (input == 3) {
+				System.out.println("-----------------------------------");
+			} else if (input == 3) {
 				System.out.println("--------------- LOGOUT ------------");
 				logOut();
 				System.out.println("-----------------------------------");
-			} 
-			else if (input == 4) {
+			} else if (input == 4) {
 				System.out.println("----------- TRAIN SEARCH ----------");
 				searchTrain();
 				System.out.println("-----------------------------------");
-			}
-			else if (input == 5) {
+			} else if (input == 5) {
 				System.out.println("--------- TRAIN BOOKING -----------");
 				bookTrain();
 				System.out.println("-----------------------------------");
@@ -272,12 +279,30 @@ public class ReservationSystemApplication implements CommandLineRunner {
 
 			DateAdapter dateAdapter = new DateAdapter();
 
-			vehicle.add(traveller.getEmail(), noOfTickets, dateAdapter.convertToDate("17-12-2024"));
+			System.out.println("Payment : CC, DC, UPI Request amount: " + (vehicle.getTicketPrice() * noOfTickets));
+			String method = scanner.next();
 
-			// Update this
-			trainCRUDInterface.save(vehicle);
+			if (method.equals("CC")) {
+				
+				paymentGateway.setPaymentMethod(creditCardPayment);
+			} else if (method.equals("DC")) {
+				paymentGateway.setPaymentMethod(debitCardPayment);
+			} else if (method.equals("UPI")) {
+				paymentGateway.setPaymentMethod(upiPayment);
+			}
 
-			System.out.println("Saved passenger " + traveller.getFirstName());
+			
+			if (paymentGateway.pay() == true) {
+				vehicle.add(traveller.getEmail(), noOfTickets, dateAdapter.convertToDate("17-12-2024"));
+
+				// Update this
+				trainCRUDInterface.save(vehicle);
+
+				System.out.println("Saved passenger " + traveller.getFirstName());
+			} else {
+				System.out.println("Failed");
+			}
+
 		} catch (Exception e) {
 			throw new TrainBookingException();
 		}

@@ -36,6 +36,9 @@ public class Train {
     private StationName openingStation;
     private StationName closingStation;
 
+    // Ticket price
+    private int ticketPrice;
+
     // List of passengers
     private List<PassengerJourney> passengerJourneys = new ArrayList<PassengerJourney>();
     
@@ -141,5 +144,13 @@ public class Train {
 
     public void setClosingStation(StationName closingStation) {
         this.closingStation = closingStation;
+    }
+
+    public void setTicketPrice(int ticketPrice) { 
+        this.ticketPrice = ticketPrice;
+    }
+
+    public int getTicketPrice() { 
+        return ticketPrice;
     }
 }

@@ -20,7 +20,7 @@ public class ShatabdiFactory implements TrainFactoryInterface{
         trainBuilder.reset();
         trainBuilder.addTrainFeatures(10, 120);
         trainBuilder.addTrainDetails(42.55, "WXM-AWS", TrainType.SHATABDI);
-        trainBuilder.addTrainIdentifiers(trainNumber, openingStation, closingStation);
+        trainBuilder.addTrainIdentifiers(trainNumber, openingStation, closingStation, 200);
 
         return trainBuilder.build();
     }

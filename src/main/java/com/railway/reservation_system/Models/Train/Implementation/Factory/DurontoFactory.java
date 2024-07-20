@@ -21,7 +21,7 @@ public class DurontoFactory implements TrainFactoryInterface {
         trainBuilder.reset();
         trainBuilder.addTrainFeatures(10, 150);
         trainBuilder.addTrainDetails(40.15, "RXS-WED", TrainType.DURONTO);
-        trainBuilder.addTrainIdentifiers(trainNumber, openingStation, closingStation);
+        trainBuilder.addTrainIdentifiers(trainNumber, openingStation, closingStation, 120);
 
         return trainBuilder.build();
     }

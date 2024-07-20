@@ -26,7 +26,7 @@ public class GaribRathFactory implements TrainFactoryInterface{
         trainBuilder.reset();
         trainBuilder.addTrainFeatures(18, 300);
         trainBuilder.addTrainDetails(23.5, "MMT-XMS", TrainType.GARIBRATH);
-        trainBuilder.addTrainIdentifiers(trainNumber, openingStation, closingStation);
+        trainBuilder.addTrainIdentifiers(trainNumber, openingStation, closingStation, 90);
 
         return trainBuilder.build();
     }
