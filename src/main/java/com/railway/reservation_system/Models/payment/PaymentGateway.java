@@ -16,8 +16,8 @@ public class PaymentGateway {
 
     }
 
-    public boolean pay() throws PaymentException {
-        return paymentStrategy.pay();
+    public boolean pay(int requestAmount) throws PaymentException {
+        return paymentStrategy.pay(requestAmount);
         
     }
 

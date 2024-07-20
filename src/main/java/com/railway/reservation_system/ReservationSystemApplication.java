@@ -144,7 +144,7 @@ public class ReservationSystemApplication implements CommandLineRunner {
 				signUp();
 				System.out.println("-----------------------------------");
 			} else if (input == 3) {
-				System.out.println("--------------- LOGOUT ------------");
+				System.out.println("--------- LOGOUT ------------------");
 				logOut();
 				System.out.println("-----------------------------------");
 			} else if (input == 4) {
@@ -283,7 +283,6 @@ public class ReservationSystemApplication implements CommandLineRunner {
 			String method = scanner.next();
 
 			if (method.equals("CC")) {
-				
 				paymentGateway.setPaymentMethod(creditCardPayment);
 			} else if (method.equals("DC")) {
 				paymentGateway.setPaymentMethod(debitCardPayment);
@@ -292,7 +291,7 @@ public class ReservationSystemApplication implements CommandLineRunner {
 			}
 
 			
-			if (paymentGateway.pay() == true) {
+			if (paymentGateway.pay(vehicle.getTicketPrice() * noOfTickets) == true) {
 				vehicle.add(traveller.getEmail(), noOfTickets, dateAdapter.convertToDate("17-12-2024"));
 
 				// Update this

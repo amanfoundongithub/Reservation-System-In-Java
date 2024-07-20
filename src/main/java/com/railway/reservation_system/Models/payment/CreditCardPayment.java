@@ -5,7 +5,7 @@ import com.railway.reservation_system.utils.exception.PaymentException;
 public class CreditCardPayment implements PaymentStrategy {
 
 
-    public boolean pay() throws PaymentException {
+    public boolean pay(int requestAmount) throws PaymentException {
 
         try {
             return true;
