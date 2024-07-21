@@ -37,7 +37,7 @@ public class Train {
     private StationName closingStation;
 
     // Ticket price
-    private int ticketPrice;
+    private float ticketPrice;
 
     // List of passengers
     private List<String> Tickets = new ArrayList<>();
@@ -139,11 +139,11 @@ public class Train {
         this.closingStation = closingStation;
     }
 
-    public void setTicketPrice(int ticketPrice) { 
+    public void setTicketPrice(float ticketPrice) { 
         this.ticketPrice = ticketPrice;
     }
 
-    public int getTicketPrice() { 
+    public float getTicketPrice() { 
         return ticketPrice;
     }
 }

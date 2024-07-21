@@ -67,6 +67,14 @@ public class ReservationSystemApplication implements CommandLineRunner {
 				System.out.println("--------- ALL BOOKINGS -----------");
 				trainApplication.getAllTickets(passengerApplication.getPassenger());
 				System.out.println("-----------------------------------");
+			} else if (input == 7){
+				System.out.println("--------- PRICE HIKE --------------");
+				trainApplication.priceHike();
+				System.out.println("-----------------------------------");
+			} else if (input == 8){
+				System.out.println("--------- RESET ALL --------------");
+				trainApplication.resetTrains();
+				System.out.println("-----------------------------------");
 			}
 
 		}

@@ -6,9 +6,9 @@ import com.railway.reservation_system.exception.InputException;
 import com.railway.reservation_system.exception.PrintException;
 
 /**
- * Base class containing input operations and abstractions 
+ * Base class containing input operations and abstractions
  * 
- * @author amanfoundongithub 
+ * @author amanfoundongithub
  * 
  */
 public class BaseApplication {
@@ -46,6 +46,22 @@ public class BaseApplication {
         try {
             System.out.print(message);
             return scanner.nextInt();
+        } catch (Exception e) {
+            throw new InputException(e);
+        }
+    }
+
+    /**
+     * Takes an float value as input
+     * 
+     * @param message to be displayed
+     * @return Float
+     * @throws InputException
+     */
+    protected float inputFloat(String message) throws InputException {
+        try {
+            System.out.print(message);
+            return scanner.nextFloat();
         } catch (Exception e) {
             throw new InputException(e);
         }

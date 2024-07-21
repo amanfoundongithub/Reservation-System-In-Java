@@ -14,7 +14,7 @@ public class PaymentGateway {
         this.paymentStrategy = paymentStrategy;
     }
 
-    public boolean pay(int requestedAmount) throws PaymentException { 
+    public boolean pay(float requestedAmount) throws PaymentException { 
         return this.paymentStrategy.pay(requestedAmount);
     }
 }

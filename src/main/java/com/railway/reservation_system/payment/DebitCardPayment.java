@@ -5,7 +5,7 @@ import com.railway.reservation_system.exception.PaymentException;
 public class DebitCardPayment implements PaymentStrategy {
 
     @Override
-    public boolean pay(int requestedAmount) throws PaymentException {
+    public boolean pay(float requestedAmount) throws PaymentException {
         try {
             return true;
         } catch(Exception e) {

@@ -3,6 +3,7 @@ package com.railway.reservation_system.app;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.railway.reservation_system.exception.PriceHikeException;
 import com.railway.reservation_system.exception.TicketException;
 import com.railway.reservation_system.exception.TrainBookingException;
 import com.railway.reservation_system.exception.TrainSearchException;
@@ -48,7 +49,6 @@ public class TrainApplication extends BaseApplication {
          * Populate with trains
          * 
          */
-        trainCRUDInterface.deleteAll();
 
         RajdhaniFactory rajdhaniFactory = new RajdhaniFactory();
 
@@ -64,10 +64,13 @@ public class TrainApplication extends BaseApplication {
         for (StationName openingStation : StationName.values()) {
             for (StationName closingStation : StationName.values()) {
                 if (openingStation != closingStation) {
-                    Train rajdhaniTrain = rajdhaniFactory.createTrain(trainNum, openingStation, closingStation);
 
-                    trainCRUDInterface.save(rajdhaniTrain);
-                    trainNum += 1;
+                    Train rajdhaniTrain = rajdhaniFactory.createTrain(trainNum, openingStation, closingStation);
+                    if (trainCRUDInterface.findByTrainNumber(trainNum).isEmpty()) {
+                        trainCRUDInterface.save(rajdhaniTrain);
+                        trainNum += 1;
+                    }
+
                 }
             }
 
@@ -79,9 +82,11 @@ public class TrainApplication extends BaseApplication {
                 if (openingStation != closingStation) {
                     Train durontoTrain = durontoFactory.createTrain(trainNum, openingStation, closingStation);
 
-                    trainCRUDInterface.save(durontoTrain);
+                    if (trainCRUDInterface.findByTrainNumber(trainNum).isEmpty()) {
+                        trainCRUDInterface.save(durontoTrain);
+                        trainNum += 1;
+                    }
 
-                    trainNum += 1;
                 }
             }
 
@@ -93,9 +98,11 @@ public class TrainApplication extends BaseApplication {
                 if (openingStation != closingStation) {
                     Train shatabdiTrain = shatabdiFactory.createTrain(trainNum, openingStation, closingStation);
 
-                    trainCRUDInterface.save(shatabdiTrain);
+                    if (trainCRUDInterface.findByTrainNumber(trainNum).isEmpty()) {
+                        trainCRUDInterface.save(shatabdiTrain);
+                        trainNum += 1;
+                    }
 
-                    trainNum += 1;
                 }
             }
 
@@ -222,4 +229,31 @@ public class TrainApplication extends BaseApplication {
         }
     }
 
+    public void priceHike() throws PriceHikeException {
+        try {
+            float percentage = inputFloat("Enter percentage increase in prices:");
+            print("PRICE HIKE STARTED...");
+
+            for (Train train : trainCRUDInterface.findAll()) {
+                float original_price = train.getTicketPrice();
+                original_price = original_price * (1 + percentage / 100);
+
+                train.setTicketPrice(original_price);
+                trainCRUDInterface.save(train);
+            }
+            print("...PRICE HIKE DONE");
+        } catch (Exception e) {
+            throw new PriceHikeException(e);
+        }
+
+    }
+
+    public void resetTrains() {
+
+        for (Train train : trainCRUDInterface.findAll()) {
+            train.reset();
+            trainCRUDInterface.save(train);
+        }
+
+    }
 }
