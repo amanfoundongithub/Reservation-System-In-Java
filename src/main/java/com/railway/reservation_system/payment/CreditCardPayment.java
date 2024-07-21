@@ -1,6 +1,6 @@
 package com.railway.reservation_system.payment;
 
-import com.railway.reservation_system.utils.exception.PaymentException;
+import com.railway.reservation_system.exception.PaymentException;
 
 public class CreditCardPayment implements PaymentStrategy {
 

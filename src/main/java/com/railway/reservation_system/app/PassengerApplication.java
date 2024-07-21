@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.railway.reservation_system.builder.PassengerBuilder;
+import com.railway.reservation_system.exception.LogOutException;
+import com.railway.reservation_system.exception.LoginException;
+import com.railway.reservation_system.exception.SignUpException;
 import com.railway.reservation_system.model.Passenger;
 import com.railway.reservation_system.repository.PassengerCRUDInterface;
-import com.railway.reservation_system.utils.exception.LogOutException;
-import com.railway.reservation_system.utils.exception.LoginException;
-import com.railway.reservation_system.utils.exception.SignUpException;
 import com.railway.reservation_system.utils.validator.LoginValidator;
 
 import java.util.Optional;

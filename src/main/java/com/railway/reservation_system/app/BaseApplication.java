@@ -2,8 +2,8 @@ package com.railway.reservation_system.app;
 
 import java.util.Scanner;
 
-import com.railway.reservation_system.utils.exception.InputException;
-import com.railway.reservation_system.utils.exception.PrintException;
+import com.railway.reservation_system.exception.InputException;
+import com.railway.reservation_system.exception.PrintException;
 
 /**
  * Base class containing input operations and abstractions 

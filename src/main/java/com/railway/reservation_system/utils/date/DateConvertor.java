@@ -1,6 +1,6 @@
 package com.railway.reservation_system.utils.date;
 
-import com.railway.reservation_system.utils.exception.InvalidDateException;
+import com.railway.reservation_system.exception.InvalidDateException;
 
 /**
  * Custom date handler to handle dates in this application 
