@@ -2,7 +2,7 @@ package com.railway.reservation_system.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-
+import org.springframework.stereotype.Repository;
 
 import com.railway.reservation_system.Models.Train.Train;
 import com.railway.reservation_system.utils.station.StationName;
@@ -15,6 +15,7 @@ import java.util.*;
  * @author amanfoundongithub 
  * 
  */
+@Repository
 public interface TrainCRUDInterface extends MongoRepository<Train, String>{
 
 

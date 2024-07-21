@@ -5,5 +5,9 @@ public class LoginException extends Exception {
     public LoginException(){
         super("Error in Logging In to the server");
     }
+
+    public LoginException(Exception e){
+        super(e);
+    }
     
 }

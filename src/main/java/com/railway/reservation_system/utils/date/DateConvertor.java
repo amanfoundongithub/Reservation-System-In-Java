@@ -7,18 +7,19 @@ import com.railway.reservation_system.utils.exception.InvalidDateException;
  * 
  * @author amanfoundongithub 
  */
-public class DateAdapter {
+public class DateConvertor {
     
+    
+    public DateConvertor(){
+
+    }
+
     /**
      * Converts String date to Java Object
      * 
      * @param String date
      * @throws InvalidDateException if date is invalid
      */
-    public DateAdapter(){
-
-    }
-
     public Date convertToDate(String date) throws InvalidDateException {
         try{
             String[] tokens = date.split("-");
