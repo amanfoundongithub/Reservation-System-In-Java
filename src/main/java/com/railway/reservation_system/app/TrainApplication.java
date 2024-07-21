@@ -9,11 +9,13 @@ import com.railway.reservation_system.factory.DurontoFactory;
 import com.railway.reservation_system.factory.RajdhaniFactory;
 import com.railway.reservation_system.factory.ShatabdiFactory;
 import com.railway.reservation_system.model.Passenger;
+import com.railway.reservation_system.model.Ticket;
 import com.railway.reservation_system.model.Train;
 import com.railway.reservation_system.payment.CreditCardPayment;
 import com.railway.reservation_system.payment.DebitCardPayment;
 import com.railway.reservation_system.payment.PaymentGateway;
 import com.railway.reservation_system.payment.UpiPayment;
+import com.railway.reservation_system.repository.TicketCRUDInterface;
 import com.railway.reservation_system.repository.TrainCRUDInterface;
 import com.railway.reservation_system.utils.date.DateConvertor;
 import com.railway.reservation_system.utils.station.StationName;
@@ -26,6 +28,9 @@ public class TrainApplication extends BaseApplication {
 
     @Autowired
     private TrainCRUDInterface trainCRUDInterface;
+
+    @Autowired
+    private TicketCRUDInterface ticketCRUDInterface;
 
     private PaymentGateway paymentGateway = new PaymentGateway();
 
@@ -165,7 +170,9 @@ public class TrainApplication extends BaseApplication {
             }
 
             if (paymentGateway.pay(vehicle.getTicketPrice() * noOfTickets) == true) {
-                vehicle.add(passenger.getEmail(), noOfTickets, dateConvertor.convertToDate("17-12-2024"));
+                Ticket ticket = new Ticket(passenger.getEmail(), noOfTickets, null, trainNumber);
+                ticket = ticketCRUDInterface.save(ticket);
+                vehicle.add(ticket);
 
                 // Update this
                 trainCRUDInterface.save(vehicle);

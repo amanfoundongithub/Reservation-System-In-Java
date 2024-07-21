@@ -6,9 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.*;
 
 import com.railway.reservation_system.utils.station.StationName;
-import com.railway.reservation_system.utils.train.PassengerJourney;
 import com.railway.reservation_system.utils.train.TrainType;
-import com.railway.reservation_system.utils.date.Date;
 
 /**
  * Train base class 
@@ -42,7 +40,7 @@ public class Train {
     private int ticketPrice;
 
     // List of passengers
-    private List<PassengerJourney> passengerJourneys = new ArrayList<PassengerJourney>();
+    private List<String> Tickets = new ArrayList<>();
     
 
     // Constructor of the base class of the train 
@@ -51,24 +49,17 @@ public class Train {
 
     // Updation 
     public void reset(){
-        passengerJourneys.clear();
+        Tickets.clear();
         availableSeats = capacity;
     }
 
-    public boolean add(PassengerJourney passengerJourney){
-        availableSeats -= passengerJourney.getNoOfTickets();
-        return passengerJourneys.add(passengerJourney);
+    public boolean add(Ticket Ticket){
+        availableSeats -= Ticket.getNoOfTickets();
+        return Tickets.add(Ticket.getId());
     }
 
-    public boolean add(String email, int noOfTickets,Date DOJ){
-        PassengerJourney passengerJourney = new PassengerJourney(email, noOfTickets, DOJ);
-        availableSeats -= noOfTickets;
-        return passengerJourneys.add(passengerJourney);
-
-    }
-
-    public List<PassengerJourney> getListOfPassengers(){
-        return this.passengerJourneys;
+    public List<String> getListOfTickets(){
+        return this.Tickets;
     }
 
     public String getId(){

@@ -1,13 +1,12 @@
-package com.railway.reservation_system.utils.train;
+package com.railway.reservation_system.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.railway.reservation_system.model.Passenger;
 import com.railway.reservation_system.utils.date.Date;
 
-@Document("passengerjourney")
-public class PassengerJourney {
+@Document("ticket")
+public class Ticket {
     
     @Id
     private String id;
@@ -18,24 +17,28 @@ public class PassengerJourney {
      */
     private String email;
 
+    private int trainNumber;
+
     private int noOfTickets;
 
     private Date dateOfJourney;
 
-    public PassengerJourney(){
+    public Ticket(){
 
     }
 
-    public PassengerJourney(Passenger passenger, int noOfTickets,Date dateOfJourney){
+    public Ticket(Passenger passenger, int noOfTickets,Date dateOfJourney, int trainNumber){
         this.email = passenger.getEmail();
         this.noOfTickets = noOfTickets;
         this.dateOfJourney = dateOfJourney;
+        this.trainNumber = trainNumber;
     }
 
-    public PassengerJourney(String email, int noOfTickets,Date dateOfJourney){
+    public Ticket(String email, int noOfTickets,Date dateOfJourney, int trainNumber){
         this.email = email;
         this.noOfTickets = noOfTickets;
         this.dateOfJourney = dateOfJourney;
+        this.trainNumber = trainNumber;
     }
 
     // Getter of ID
@@ -69,5 +72,13 @@ public class PassengerJourney {
 
     public Date getDOJ(){
         return this.dateOfJourney;
+    }
+
+    public void setTrainNumber(int trainNumber) { 
+        this.trainNumber = trainNumber;
+    }
+
+    public int getTrainNumber(){
+        return this.trainNumber;
     }
 }
