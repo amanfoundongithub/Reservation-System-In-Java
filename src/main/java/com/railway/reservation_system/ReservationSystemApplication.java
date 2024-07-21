@@ -63,6 +63,10 @@ public class ReservationSystemApplication implements CommandLineRunner {
 				System.out.println("--------- TRAIN BOOKING -----------");
 				trainApplication.bookTrain(passengerApplication.getPassenger());
 				System.out.println("-----------------------------------");
+			} else if (input == 6){
+				System.out.println("--------- ALL BOOKINGS -----------");
+				trainApplication.getAllTickets(passengerApplication.getPassenger());
+				System.out.println("-----------------------------------");
 			}
 
 		}

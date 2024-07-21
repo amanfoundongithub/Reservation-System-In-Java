@@ -3,6 +3,7 @@ package com.railway.reservation_system.app;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.railway.reservation_system.exception.TicketException;
 import com.railway.reservation_system.exception.TrainBookingException;
 import com.railway.reservation_system.exception.TrainSearchException;
 import com.railway.reservation_system.factory.DurontoFactory;
@@ -51,7 +52,7 @@ public class TrainApplication extends BaseApplication {
 
         RajdhaniFactory rajdhaniFactory = new RajdhaniFactory();
 
-        DurontoFactory durontoFactory   = new DurontoFactory();
+        DurontoFactory durontoFactory = new DurontoFactory();
 
         ShatabdiFactory shatabdiFactory = new ShatabdiFactory();
 
@@ -158,6 +159,8 @@ public class TrainApplication extends BaseApplication {
 
             DateConvertor dateConvertor = new DateConvertor();
 
+            String date = input("Enter the date of journey (DD-MM-YYYY): ");
+
             print("Payment : CC, DC, UPI \nRequest amount: " + (vehicle.getTicketPrice() * noOfTickets));
             String method = scanner.next();
 
@@ -170,7 +173,9 @@ public class TrainApplication extends BaseApplication {
             }
 
             if (paymentGateway.pay(vehicle.getTicketPrice() * noOfTickets) == true) {
-                Ticket ticket = new Ticket(passenger.getEmail(), noOfTickets, null, trainNumber);
+                Ticket ticket = new Ticket(passenger.getEmail(),
+                        noOfTickets, dateConvertor.convertToDate(date),
+                        trainNumber);
                 ticket = ticketCRUDInterface.save(ticket);
                 vehicle.add(ticket);
 
@@ -184,6 +189,36 @@ public class TrainApplication extends BaseApplication {
 
         } catch (Exception e) {
             throw new TrainBookingException(e);
+        }
+    }
+
+    public void getAllTickets(Optional<Passenger> traveller) throws TicketException {
+        try {
+            // Fetch all tickets
+            if (traveller.isEmpty()) {
+                print("Please login before using this");
+                return;
+            }
+
+            Passenger passenger = traveller.get();
+
+            List<Ticket> listOfTickets = ticketCRUDInterface.findAllByEmail(passenger.getEmail());
+
+            print(listOfTickets.size() + " Tickets found for " + passenger.getFirstName() + " "
+                    + passenger.getLastName());
+            for (Ticket ticket : listOfTickets) {
+                Train train = trainCRUDInterface.findByTrainNumber(ticket.getTrainNumber()).get();
+                print("------");
+                print("Date Of Journey:" + ticket.getDOJ().toString());
+                print("Opening Station:" + train.getOpeningStation());
+                print("Closing Station:" + train.getClosingStation());
+                print("Train Number:" + ticket.getTrainNumber());
+                print("Number of Traveller(s):" + ticket.getNoOfTickets());
+                print("-----");
+            }
+
+        } catch (Exception e) {
+            throw new TicketException(e);
         }
     }
 
