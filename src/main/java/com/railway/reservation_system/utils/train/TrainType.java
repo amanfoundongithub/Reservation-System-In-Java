@@ -1,4 +1,4 @@
-package com.railway.reservation_system.Models.Train;
+package com.railway.reservation_system.utils.train;
 
 /**
  * Represents different types of trains

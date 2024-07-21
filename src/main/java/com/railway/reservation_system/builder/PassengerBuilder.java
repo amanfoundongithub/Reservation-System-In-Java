@@ -1,4 +1,6 @@
-package com.railway.reservation_system.Models.Passenger;
+package com.railway.reservation_system.builder;
+
+import com.railway.reservation_system.model.Passenger;
 
 /**
  * Auxillary class for Passenger Construction

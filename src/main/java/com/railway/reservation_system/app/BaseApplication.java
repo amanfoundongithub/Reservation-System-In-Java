@@ -5,32 +5,40 @@ import java.util.Scanner;
 import com.railway.reservation_system.utils.exception.InputException;
 import com.railway.reservation_system.utils.exception.PrintException;
 
+/**
+ * Base class containing input operations and abstractions 
+ * 
+ * @author amanfoundongithub 
+ * 
+ */
 public class BaseApplication {
-    
+
     protected Scanner scanner = new Scanner(System.in);
 
-    public BaseApplication(){
+    public BaseApplication() {
 
     }
 
     /**
-     * Takes String as input 
-     * @param message to be shown to user 
-     * @return Input string 
+     * Takes String as input
+     * 
+     * @param message to be shown to user
+     * @return Input string
      * @throws InputException
      */
     protected String input(String message) throws InputException {
         try {
             System.out.print(message);
             return scanner.next();
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new InputException(e);
         }
     }
 
     /**
      * Takes an integer as input
-     * @param message to be displayed to user 
+     * 
+     * @param message to be displayed to user
      * @return Integer
      * @throws InputException
      */
@@ -38,7 +46,7 @@ public class BaseApplication {
         try {
             System.out.print(message);
             return scanner.nextInt();
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new InputException(e);
         }
     }
@@ -46,13 +54,13 @@ public class BaseApplication {
     /**
      * Prints a given line
      * 
-     * @param message to be printed 
+     * @param message to be printed
      * @throws PrintException
      */
     protected void print(String message) throws PrintException {
         try {
             System.out.println(message);
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new PrintException(e);
         }
     }

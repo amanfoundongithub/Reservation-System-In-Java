@@ -6,10 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-
 import com.railway.reservation_system.app.PassengerApplication;
 import com.railway.reservation_system.app.TrainApplication;
-
 
 import java.util.Scanner;
 
@@ -17,15 +15,13 @@ import java.util.Scanner;
 @EnableMongoRepositories
 public class ReservationSystemApplication implements CommandLineRunner {
 
-	@Autowired 
+	@Autowired
 	private PassengerApplication passengerApplication;
 
 	@Autowired
 	private TrainApplication trainApplication;
 
-
 	private Scanner scanner = new Scanner(System.in);
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReservationSystemApplication.class, args);
@@ -34,7 +30,6 @@ public class ReservationSystemApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		
 		// Initialize the client
 		System.out.println("Initializing Command Line Runner...");
 
@@ -43,7 +38,7 @@ public class ReservationSystemApplication implements CommandLineRunner {
 		trainApplication.populate();
 
 		while (input != -1) {
-			
+
 			System.out.print("Enter number: ");
 
 			input = scanner.nextInt();
@@ -72,7 +67,7 @@ public class ReservationSystemApplication implements CommandLineRunner {
 
 		}
 
-		System.out.println("Thank you for using application");
+		System.out.println("Application ended");
 
 		scanner.close();
 		System.exit(0);

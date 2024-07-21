@@ -1,6 +1,8 @@
-package com.railway.reservation_system.Models.Train;
+package com.railway.reservation_system.builder;
 
+import com.railway.reservation_system.model.Train;
 import com.railway.reservation_system.utils.station.StationName;
+import com.railway.reservation_system.utils.train.TrainType;
 
 /**
  * Builder for the Train Base Class

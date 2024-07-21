@@ -1,4 +1,4 @@
-package com.railway.reservation_system.Models.Passenger;
+package com.railway.reservation_system.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;

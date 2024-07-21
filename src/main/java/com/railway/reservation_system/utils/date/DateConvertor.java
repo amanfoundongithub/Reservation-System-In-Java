@@ -3,7 +3,7 @@ package com.railway.reservation_system.utils.date;
 import com.railway.reservation_system.utils.exception.InvalidDateException;
 
 /**
- * Adapts date string in Java
+ * Custom date handler to handle dates in this application 
  * 
  * @author amanfoundongithub 
  */
@@ -16,8 +16,7 @@ public class DateConvertor {
 
     /**
      * Converts String date to Java Object
-     * 
-     * @param String date
+     * @param date in DD-MM-YYYY format
      * @throws InvalidDateException if date is invalid
      */
     public Date convertToDate(String date) throws InvalidDateException {

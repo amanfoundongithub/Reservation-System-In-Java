@@ -3,7 +3,7 @@ package com.railway.reservation_system.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.railway.reservation_system.Models.Passenger.Passenger;
+import com.railway.reservation_system.model.Passenger;
 
 import java.util.Optional;
 

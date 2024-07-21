@@ -1,7 +1,7 @@
-package com.railway.reservation_system.Models.Train.Implementation.Interface;
+package com.railway.reservation_system.factory;
 
+import com.railway.reservation_system.model.Train;
 import com.railway.reservation_system.utils.station.StationName;
-import com.railway.reservation_system.Models.Train.Train;
 
 /**
  * Interface for factory to construct the Trains

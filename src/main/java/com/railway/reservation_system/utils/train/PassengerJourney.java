@@ -1,9 +1,9 @@
-package com.railway.reservation_system.Models.Train;
+package com.railway.reservation_system.utils.train;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.railway.reservation_system.Models.Passenger.Passenger;
+import com.railway.reservation_system.model.Passenger;
 import com.railway.reservation_system.utils.date.Date;
 
 @Document("passengerjourney")

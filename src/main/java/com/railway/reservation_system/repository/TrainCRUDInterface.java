@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.railway.reservation_system.Models.Train.Train;
+import com.railway.reservation_system.model.Train;
 import com.railway.reservation_system.utils.station.StationName;
 
 import java.util.*;

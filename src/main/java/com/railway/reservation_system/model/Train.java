@@ -1,4 +1,4 @@
-package com.railway.reservation_system.Models.Train;
+package com.railway.reservation_system.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.*;
 
 import com.railway.reservation_system.utils.station.StationName;
+import com.railway.reservation_system.utils.train.PassengerJourney;
+import com.railway.reservation_system.utils.train.TrainType;
 import com.railway.reservation_system.utils.date.Date;
 
 /**

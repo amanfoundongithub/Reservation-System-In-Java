@@ -1,10 +1,9 @@
-package com.railway.reservation_system.Models.Train.Implementation.Factory;
+package com.railway.reservation_system.factory;
 
 import com.railway.reservation_system.utils.station.StationName;
-import com.railway.reservation_system.Models.Train.Train;
-import com.railway.reservation_system.Models.Train.TrainBuilder;
-import com.railway.reservation_system.Models.Train.TrainType;
-import com.railway.reservation_system.Models.Train.Implementation.Interface.TrainFactoryInterface;
+import com.railway.reservation_system.utils.train.TrainType;
+import com.railway.reservation_system.builder.TrainBuilder;
+import com.railway.reservation_system.model.Train;
 
 public class ShatabdiFactory implements TrainFactoryInterface{
     private TrainBuilder trainBuilder = new TrainBuilder();
