@@ -251,7 +251,11 @@ public class TrainApplication extends BaseApplication {
     public void resetTrains() {
 
         for (Train train : trainCRUDInterface.findAll()) {
+         
+            ticketCRUDInterface.deleteAllById(train.getListOfTickets());
+            
             train.reset();
+            
             trainCRUDInterface.save(train);
         }
 
